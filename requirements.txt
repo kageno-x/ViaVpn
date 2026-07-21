@@ -1,8 +1,0 @@
-# HTTP-клиент для запросов к 3x-ui API.
-aiohttp
-# Загрузка конфигурации из .env или qq.env.
-python-dotenv
-# Telegram API и FSM для ботов.
-aiogram
-# Генерация QR-кодов для подключения.
-Pillow
