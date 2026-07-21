@@ -1,0 +1,22 @@
+services:
+    via-bot:
+        # Основной Telegram-бот для управления VPN-клиентами.
+        build: .
+        container_name: Via-bot
+        restart: unless-stopped
+        env_file:
+            - ./qq.env
+        volumes:
+            - ./:/app
+        command: python via.py
+
+    support_bot:
+        # Бот поддержки для тикетов и общения с пользователями.
+        build: .
+        container_name: Support-bot
+        restart: unless-stopped
+        env_file:
+            - ./qq.env
+        volumes:
+            - ./:/app
+        command: python support.py
