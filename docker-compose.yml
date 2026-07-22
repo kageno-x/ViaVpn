@@ -1,13 +1,13 @@
 services:
-    via-bot:
+    vpn-bot:
         build: .
-        container_name: Via-bot
+        container_name: vpn-bot
         restart: unless-stopped
         env_file:
             - ./qq.env
         volumes:
             - ./:/app
-        command: python via.py
+        command: python vpn.py
 
     support_bot:
         build: .
@@ -20,7 +20,7 @@ services:
         command: python support.py
     web:
         image: nginx:alpine
-        container_name: Via-web
+        container_name: vpn-web
         restart: unless-stopped
         env_file:
             - ./qq.env
@@ -31,7 +31,7 @@ services:
         command: |
             /bin/sh -c "
             export DOMAIN=$(echo $$DOMAIN | sed -e 's|^https://||' -e 's|^http://||' -e 's|/$$||');
-            printf 'window.APP_CONFIG = {\n  SUPPORT_BOT_URL: \"%s\",\n  MAIN_BOT_URL: \"%s\"\n};\n' \"$${SUPPORT_BOT_URL}\" \"$${MAIN_BOT_URL}\" > /usr/share/nginx/html/env-config.js
+                printf 'window.APP_CONFIG = {\n  SUPPORT_BOT_URL: \"%s\",\n  MAIN_BOT_URL: \"%s\",\n  SITE_NAME: \"%s\",\n  SITE_FULL: \"%s\"\n};\n' \"$${SUPPORT_BOT_URL}\" \"$${MAIN_BOT_URL}\" \"$${SITE_NAME}\" \"$${SITE_FULL}\" > /usr/share/nginx/html/env-config.js
             exec /docker-entrypoint.sh nginx -g 'daemon off;'
             "
         ports:
