@@ -10,7 +10,6 @@
     --accent: #fff;
     --accent-ink: #0b0b0b;
     --good: #caff63;
-    --shadow: #0008;
     --grid: #fff;
 }
 [data-theme="light"] {
@@ -25,7 +24,6 @@
     --accent: #11110f;
     --accent-ink: #faf9f4;
     --good: #4b7f00;
-    --shadow: #918e8052;
     --grid: #111;
 }
 * {
@@ -37,6 +35,9 @@ html {
 body {
     margin: 0;
     min-width: 320px;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
     background: var(--bg);
     color: var(--text);
     font-family: Manrope, Arial, sans-serif;
@@ -64,12 +65,22 @@ a {
     position: relative;
     z-index: 2;
 }
+#app {
+    flex: 1 0 auto;
+    min-height: 0;
+}
 .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
     height: 86px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid var(--line);
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 }
 .logo {
     display: flex;
@@ -145,12 +156,12 @@ a {
     box-shadow: 0 0 17px var(--good);
 }
 .home {
-    min-height: calc(100vh - 86px);
+    min-height: calc(100dvh - 86px);
     display: grid;
     grid-template-columns: 1.08fr 0.92fr;
     align-items: center;
     gap: 42px;
-    padding: 54px 0 68px;
+    padding: 24px 0 40px;
 }
 .home-copy {
     padding-bottom: 12px;
@@ -321,23 +332,6 @@ a {
     top: 61%;
     right: 0;
     animation: blink 2.2s 1.2s ease-in-out infinite;
-}
-.art-caption {
-    position: absolute;
-    bottom: 6%;
-    left: 0;
-    right: 0;
-    text-align: center;
-    color: var(--faint);
-    font:
-        10px "DM Mono",
-        monospace;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-}
-.art-caption b {
-    color: var(--text);
-    font-weight: 500;
 }
 @keyframes spin {
     to {
@@ -692,6 +686,7 @@ a {
     display: flex;
     justify-content: space-between;
     border-top: 1px solid var(--line);
+    margin-top: auto;
 }
 .toast {
     position: fixed;
