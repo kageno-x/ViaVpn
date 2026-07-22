@@ -14,9 +14,9 @@
     --grid: #fff;
 }
 [data-theme="light"] {
-    --bg: #f0efea;
-    --surface: #fbfaf6;
-    --surface-2: #f5f3ed;
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #ffffff;
     --text: #11110f;
     --muted: #6d6c66;
     --faint: #99978e;
@@ -117,7 +117,6 @@ a {
     width: 17px;
 }
 .support-link {
-    gap: 8px;
     padding: 0 13px;
     font-size: 12px;
     font-weight: 700;
@@ -775,7 +774,6 @@ a {
     }
     .home-note {
         gap: 12px;
-        font-size: 9px;
     }
     .home-note span:last-child {
         display: none;
@@ -854,7 +852,6 @@ a {
         font-size: 10px;
     }
     .footer {
-        flex-direction: column;
         gap: 8px;
     }
     .metric {
