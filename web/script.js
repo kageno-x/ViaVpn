@@ -1,4 +1,4 @@
-const SUPPORT_TELEGRAM = "https://t.me/BOT_USERNAME";
+const SUPPORT_TELEGRAM = "";
 
 const SUBSCRIPTION_HOST = window.location.origin;
 const BOT_URL = window.location.origin;
@@ -56,7 +56,11 @@ const platforms = {
 };
 const supportBtn = document.getElementById("support-btn");
 if (supportBtn) {
-    supportBtn.href = SUPPORT_TELEGRAM;
+    if (SUPPORT_TELEGRAM) {
+        supportBtn.href = SUPPORT_TELEGRAM;
+    } else {
+        supportBtn.style.display = "none";
+    }
 }
 function art() {
     return '<div class="art-wrap" aria-hidden="true"><div class="signal-art"><i class="ray"></i><i class="ring r1"></i><i class="ring r2"></i><i class="ring r3"></i><i class="planet"></i><i class="star s1"></i><i class="star s2"></i><i class="star s3"></i></div></div>';
