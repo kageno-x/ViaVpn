@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#090909" />
+        <title>ViaVpn</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <header class="page topbar">
+            <a class="logo" href="/" aria-label="Via"
+                ><span class="logo-mark"
+                    ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+                        <path d="M3 12h4l2-7 4 14 2-7h6" /></svg></span
+                >Via</a
+            >
+            <div class="right-actions">
+                <button class="icon-button" id="theme" aria-label="Сменить тему">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+                    </svg>
+                </button>
+                <a class="support-link" id="support-btn" href="#" target="_blank">
+                    <span>Поддержка</span
+                    ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17 17 7M7 7h10v10" /></svg
+                ></a>
+            </div>
+        </header>
+        <main class="page" id="app"></main>
+        <footer class="page footer"><span>© 2026 Via</span><span>Connection 01</span></footer>
+        <div class="toast" id="toast">Ссылка скопирована</div>
+        <script src="script.js"></script>
+    </body>
+</html>
