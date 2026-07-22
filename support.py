@@ -22,7 +22,7 @@ load_dotenv()
 TOKEN = os.getenv("SUPPORT_BOT_TOKEN")
 DB_FILE = "support_database.db"
 
-VIA_DB_FILE = os.getenv("VIA_DB_FILE", "via_database.db")
+VIA_DB_FILE = os.getenv("VPN_DB_FILE", "vpn_database.db")
 
 _ADMIN_IDS_ENV = os.getenv("SUPPORT_ADMIN_ID", "")
 ADMIN_IDS = {int(x.strip()) for x in _ADMIN_IDS_ENV.split(",") if x.strip().lstrip("-").isdigit()}
