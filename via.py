@@ -34,7 +34,7 @@ INBOUND_IDS_FALLBACK = [
     int(x.strip()) for x in INBOUND_IDS_ENV.split(",") if x.strip().lstrip("-").isdigit()
 ]
 DOMAIN = os.getenv("DOMAIN")
-WEBSITE_URL = os.getenv("WEBSITE_URL")
+WEBSITE_URL = os.getenv("DOMAIN")
 DB_FILE = "via_database.db"
 
 _ADMIN_IDS_ENV = os.getenv("ADMIN_ID", "")
