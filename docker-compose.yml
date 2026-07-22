@@ -18,7 +18,6 @@ services:
         volumes:
             - ./:/app
         command: python support.py
-        command: python support.py
     web:
         image: nginx:alpine
         container_name: Via-web
