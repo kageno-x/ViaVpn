@@ -28,7 +28,7 @@ _ADMIN_IDS_ENV = os.getenv("SUPPORT_ADMIN_ID", "")
 ADMIN_IDS = {int(x.strip()) for x in _ADMIN_IDS_ENV.split(",") if x.strip().lstrip("-").isdigit()}
 
 if not TOKEN:
-    logger.critical("КРИТИЧЕСКАЯ ОШИБКА: Проверьте SUPPORT_BOT_TOKEN в .env!")
+    logger.critical("Ошибка: Проверьте SUPPORT_BOT_TOKEN в .env!")
 if not ADMIN_IDS:
     logger.warning("SUPPORT_ADMIN_ID не задан в .env — тикеты некому будет обрабатывать.")
 
@@ -213,8 +213,6 @@ def _close_ticket_sync(ticket_id: int, closed_at: str, closed_by: str):
         _db_conn.commit()
 
 def _find_ticket_by_forward_sync(admin_chat_id: int, forwarded_msg_id: int) -> int | None:
-    """Находит ticket_id по записи о пересланном юзер-сообщении конкретному админу.
-    Используется, когда админ делает Reply прямо на форвард."""
     with _DB_LOCK:
         row = _db_conn.execute(
             "SELECT ticket_id FROM ticket_messages WHERE admin_chat_id = ? AND forwarded_msg_id = ? "
@@ -531,4 +529,3 @@ if __name__ == "__main__":
         asyncio.run(main())
     except (KeyboardInterrupt, SystemExit):
         logger.info("Бот поддержки остановлен.")
-
