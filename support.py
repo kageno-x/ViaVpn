@@ -20,9 +20,9 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 
 TOKEN = os.getenv("SUPPORT_BOT_TOKEN")
-DB_FILE = "support_database.db"
+DB_FILE = "support.db"
 
-VIA_DB_FILE = os.getenv("VPN_DB_FILE", "vpn_database.db")
+VIA_DB_FILE = os.getenv("VPN_DB_FILE", "vpn.db")
 
 _ADMIN_IDS_ENV = os.getenv("SUPPORT_ADMIN_ID", "")
 ADMIN_IDS = {int(x.strip()) for x in _ADMIN_IDS_ENV.split(",") if x.strip().lstrip("-").isdigit()}
