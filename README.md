@@ -100,14 +100,14 @@ bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.
 Откройте панель:
 
 ```text
-https://YOUR_SERVER:YOUR_PORT/WEB/
+https://DOMAIN:YOUR_PORT/WEB_PATCH
 ```
 
 ### Настройка панели 3x-ui для работы с ботом
 
 Для работы бота нужны:
 
-- `XUI_URL` — URL панели, например `https://YOUR_SERVER:YOUR_PORT`;
+- `XUI_URL` — URL панели, например `https://DOMAIN:YOUR_PORT/WEB_PATCH`;
 - `XUI_API_KEY` — API-ключ панели.
 
 Перейдите во вкладку "Входящие" и создайте нужные протоколы. Рекомендуется создать несколько вариантов, например `vless`, `vmess`, `trojan`, `hysteria`, и использовать разные типы транспорта: `websocket`, `grpc`.
