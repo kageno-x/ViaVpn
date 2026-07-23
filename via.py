@@ -337,7 +337,7 @@ def get_qr_back_keyboard():
     )
 
 def get_connect_keyboard(sub_id: str):
-    web_connect_url = f"{WEBSITE_URL}/?sub={sub_id}"
+    web_connect_url = f"{WEBSITE_URL}/subscribe/{sub_id}"
     return InlineKeyboardMarkup(
         inline_keyboard=[
             [InlineKeyboardButton(text="Настроить в Happ", url=web_connect_url, icon_custom_emoji_id="5258073068852485953")],
@@ -909,7 +909,7 @@ async def process_invite_name(m: Message, state: FSMContext):
 
     sub_id = (friend_client.get("subId") or friend_client.get("id")) if friend_client else friend_email
     vpn_link = f"{DOMAIN}/subscribe/{sub_id}"
-    friend_connect_url = f"{WEBSITE_URL}/?sub={sub_id}"
+    friend_connect_url = f"{WEBSITE_URL}/?sub{sub_id}"
 
     created_str = datetime.now().strftime("%d.%m.%Y %H:%M")
     await db_add_invite(inviter_id, friend_name, friend_email, vpn_link, created_str)
@@ -1029,7 +1029,7 @@ async def manage_friend_callback(call: CallbackQuery):
     total_used = up + down
 
     sub_id = client.get("subId") or client.get("id") or email
-    friend_connect_url = f"{WEBSITE_URL}/?sub={sub_id}"
+    friend_connect_url = f"{WEBSITE_URL}/subscribe/{sub_id}"
 
     kb = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text="Сайт для друга", url=friend_connect_url, icon_custom_emoji_id="5258073068852485953")],
