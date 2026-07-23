@@ -129,5 +129,27 @@ $("#theme").onclick = () => {
     document.documentElement.dataset.theme = next;
     localStorage.setItem("Via-theme", next);
 };
-const token = new URLSearchParams(location.search).get("sub");
-token ? subscription(token) : home();
+function init() {
+    if (window.location.hostname.startsWith("sub.")) {
+        const id = decodeURIComponent(window.location.pathname.replace(/^\/+/, "").replace(/\/$/, ""));
+        if (id) {
+            subscription(id);
+            return;
+        }
+    }
+    const path = window.location.pathname;
+    if (path.startsWith("/subscribe/")) {
+        const id = decodeURIComponent(path.replace("/subscribe/", "").replace(/\/$/, ""));
+        if (id) {
+            subscription(id);
+            return;
+        }
+    }
+    const token = new URLSearchParams(window.location.search).get("sub");
+    if (token) {
+        subscription(token);
+        return;
+    }
+    home();
+}
+init();
