@@ -35,6 +35,11 @@ INBOUND_IDS_FALLBACK = [
 ]
 DOMAIN = os.getenv("DOMAIN")
 WEBSITE_URL = os.getenv("DOMAIN")
+if DOMAIN and "://" in DOMAIN:
+    _scheme, _rest = DOMAIN.split("://", 1)
+    SUB_DOMAIN = f"{_scheme}://sub.{_rest}"
+else:
+    SUB_DOMAIN = f"sub.{DOMAIN}" if DOMAIN else DOMAIN
 DB_FILE = "vpn.db"
 
 _ADMIN_IDS_ENV = os.getenv("ADMIN_ID", "")
@@ -337,7 +342,7 @@ def get_qr_back_keyboard():
     )
 
 def get_connect_keyboard(sub_id: str):
-    web_connect_url = f"{WEBSITE_URL}/subscribe/{sub_id}"
+    web_connect_url = f"{SUB_DOMAIN}/{sub_id}"
     return InlineKeyboardMarkup(
         inline_keyboard=[
             [InlineKeyboardButton(text="Настроить в Happ", url=web_connect_url, icon_custom_emoji_id="5258073068852485953")],
@@ -568,7 +573,7 @@ async def send_or_edit_main_menu(target, user_id: int, user_display_name: str, e
     sub_info = ""
     if client:
         sub_id = client.get("subId") or client.get("id")
-        link = f"{DOMAIN}/subscribe/{sub_id}"
+        link = f"{SUB_DOMAIN}/{sub_id}"
         sub_info = (
             f"Ваша подписка:\n"
             f"<blockquote><code>{link}</code></blockquote>\n"
@@ -676,7 +681,7 @@ async def connect_callback(call: CallbackQuery):
         return
 
     sub_id = client.get("subId") or client.get("id")
-    link = f"{DOMAIN}/subscribe/{sub_id}"
+    link = f"{SUB_DOMAIN}/{sub_id}"
 
     connect_text = (
         f"<b>Конфигурация готова</b>\n\n"
@@ -708,7 +713,7 @@ async def qr_code_callback(call: CallbackQuery):
         return
 
     sub_id = client.get("subId") or client.get("id")
-    link = f"{DOMAIN}/subscribe/{sub_id}"
+    link = f"{SUB_DOMAIN}/{sub_id}"
     qr_url = get_qr_url(link)
 
     try:
@@ -908,8 +913,8 @@ async def process_invite_name(m: Message, state: FSMContext):
         friend_client = await get_client_data(friend_email, force=True)
 
     sub_id = (friend_client.get("subId") or friend_client.get("id")) if friend_client else friend_email
-    vpn_link = f"{DOMAIN}/subscribe/{sub_id}"
-    friend_connect_url = f"{WEBSITE_URL}/?sub{sub_id}"
+    vpn_link = f"{SUB_DOMAIN}/{sub_id}"
+    friend_connect_url = f"{SUB_DOMAIN}/{sub_id}"
 
     created_str = datetime.now().strftime("%d.%m.%Y %H:%M")
     await db_add_invite(inviter_id, friend_name, friend_email, vpn_link, created_str)
@@ -1021,7 +1026,7 @@ async def manage_friend_callback(call: CallbackQuery):
     friends_list = await db_get_invites(inviter_id)
     friend_local = next((f for f in friends_list if f["email"] == email), {})
     friend_name = friend_local.get("name", client.get("comment", "Друг"))
-    vpn_link = friend_local.get("vpn_link", f"{DOMAIN}/subscribe/{client.get('subId', email)}")
+    vpn_link = friend_local.get("vpn_link", f"{SUB_DOMAIN}/{client.get('subId', email)}")
 
     traffic = client.get("traffic") or {}
     up = traffic.get("up", 0)
@@ -1029,7 +1034,7 @@ async def manage_friend_callback(call: CallbackQuery):
     total_used = up + down
 
     sub_id = client.get("subId") or client.get("id") or email
-    friend_connect_url = f"{WEBSITE_URL}/subscribe/{sub_id}"
+    friend_connect_url = f"{SUB_DOMAIN}/{sub_id}"
 
     kb = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text="Сайт для друга", url=friend_connect_url, icon_custom_emoji_id="5258073068852485953")],
